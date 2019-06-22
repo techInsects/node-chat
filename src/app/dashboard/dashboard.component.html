@@ -1,0 +1,57 @@
+<mat-toolbar class="toolbar" >
+  <span routerLink = "/"> Ticketing System </span>
+  <span style="flex : 1 1 auto"></span>
+  <a *ngIf="!api.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" routerLink = "/register"> Register </a>&nbsp;&nbsp;&nbsp;
+  <a *ngIf="!api.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" routerLink = "/login"> Login </a>
+  <a *ngIf="api.loggedIn()" class="nav-link" (click)="onLogoutClick()" href="#">Logout</a>
+</mat-toolbar>
+
+
+<div class="container" > 
+<div class="container" > 
+<div class="page-header" >
+  <h1>Company Dashboard </h1>
+  <div *ngIf="user">
+    <h2 class="page-header">{{user.username}}</h2>
+    <ul class="list-group">
+      <li class="list-group-item">Username : {{user.username}}</li>
+      <li class="list-group-item">Email : {{user.email}}</li>
+    </ul>
+  </div>
+</div>
+
+
+ <aside *ngIf="user">
+  <ul>
+    <li><a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" routerLink = "/project/{{user._id}}">Add New Project</a></li>
+    <li><a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" routerLink = "/agent/{{user._id}}">Add Agent</a></li>
+  </ul>
+</aside>
+
+
+
+  <table class="table table-hover" style="margin-left:120px;">
+    <thead>
+      <tr>
+        <th>Project Name</th>
+        <th>Url</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let project of projects | paginate: { itemsPerPage: 5, currentPage: p }" >
+       
+           <td>{{project.name }}</td>
+           <td> {{project.url}}</td>
+           <td><a routerLink = "/project-detail/{{project.name}}">Detail</a></td>
+           <td><a routerLink = "/proj-page/{{project.name}}/{{project._id}}">Chat</a></td>
+           <td><a routerLink = "/assign-proj/{{project.company_Id}}/{{project._id}}">Assign Agent</a></td>
+         </tr>   
+        
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </tbody>
+  </table>
+
+
+</div>
+
+<!-- <iframe style="height:300px;width: 300px;" src="http://localhost:3000/#/proj-page/mastercraft/5b90f114b9bf4c2078a9a762"></iframe> -->

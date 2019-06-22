@@ -1,0 +1,27 @@
+<mat-toolbar class="toolbar" >
+  <span routerLink = "/"> Ticketing System </span>
+  <span style="flex : 1 1 auto"></span>
+  <a *ngIf="!api.loggedIn" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" routerLink = "/register"> Register </a>&nbsp;&nbsp;&nbsp;
+  <a *ngIf="!api.loggedIn" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" routerLink = "/login"> Login </a>
+  <a *ngIf="api.loggedIn" class="nav-link" (click)="onLogoutClick()" href="#">Logout</a>
+</mat-toolbar>
+
+<mat-card>
+  <mat-card-title> Add Project </mat-card-title>
+
+  <mat-card-content>
+    <form id="formData" #data="ngForm" (ngSubmit)="addproject(data.value)">
+      <mat-form-field>
+        <input matInput placeholder="project name" name="name" type="text" ngModel>
+      </mat-form-field>
+
+       <br>
+      <mat-form-field>
+        <input matInput placeholder="Site Url" name="url" type="text" ngModel>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button color="primary" type="submit" >Add</button>
+
+    </form>
+  </mat-card-content>
+</mat-card>

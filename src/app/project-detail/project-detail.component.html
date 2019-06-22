@@ -1,0 +1,57 @@
+<mat-toolbar class="toolbar" >
+  <span routerLink = "/"> Ticketing System </span>
+  <span style="flex : 1 1 auto"></span>
+  <a *ngIf="!api.loggedIn" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" routerLink = "/register"> Register </a>&nbsp;&nbsp;&nbsp;
+  <a *ngIf="!api.loggedIn" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}" routerLink = "/login"> Login </a>
+  <a *ngIf="api.loggedIn" class="nav-link" (click)="onLogoutClick()" href="#">Logout</a>
+</mat-toolbar>
+<mat-card>
+<div class="container">
+  <div class="container-fluid"  >
+    
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false" routerLink = "/dashboard">Back To Listing</a>
+    
+    </div>
+       
+        
+       
+    
+    
+    <div class="col-xs-6 col-sm-5 col-md-5 col-lg-5" id="data">
+     
+    
+      
+      <table class="table table-hover" style="margin-left:150px;">
+        <thead>
+          <tr>
+            <th>Agent Name</th>
+            <th>Project Assigned</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ag of agent">
+           
+               <td>{{ag.agent_name}}</td>
+               <td>{{ag.project_name}}</td>
+                <td><button class="btn btn-primary" routerLink = "/edit-proj-detail/{{ag._id}}">Edit</button></td>
+                <td><button class="btn btn-danger" >Delete</button></td>
+                
+                 
+                  
+             </tr>   
+             <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+       
+        </tbody>
+      </table>
+      
+    </div>
+        
+    
+     
+      
+  </div>
+</div>
